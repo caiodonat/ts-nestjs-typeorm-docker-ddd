@@ -7,10 +7,12 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Person')
 @Controller('person')
 export class PersonController {
-  constructor(private readonly personService: PersonService) {}
+  constructor(private readonly personService: PersonService) { }
 
   @Post()
-  create(@Body() createPersonDto: CreatePersonDto) {
+  create(
+    @Body() createPersonDto: CreatePersonDto
+  ) {
     return this.personService.create(createPersonDto);
   }
 
@@ -20,12 +22,17 @@ export class PersonController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(
+    @Param('id') id: string
+  ) {
     return this.personService.findOne(+id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePersonDto: UpdatePersonDto
+  ) {
     return this.personService.update(+id, updatePersonDto);
   }
 }
