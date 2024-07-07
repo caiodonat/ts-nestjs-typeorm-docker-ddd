@@ -3,6 +3,7 @@ import { Person } from "./entities/person.entity";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreatePersonDto } from "./dto/create-person.dto";
+import { SearchPersonDto } from "./dto/search-person.dto";
 
 @Injectable()
 export default class PersonRepository {
@@ -12,14 +13,13 @@ export default class PersonRepository {
 		private readonly personCrud: Repository<Person>
 	) { }
 
-	public async insertPerson(newPerson: CreatePersonDto) {
-		// this.personCrud.create(newPerson);
-
+	public async insertPerson(newPerson: CreatePersonDto): Promise<Person> {
 		return this.personCrud.save(newPerson);
 	}
 
-	public async selectAllPerson() {
-		return await this.personCrud.find();
+	public async selectManyPersonWithFilters(filters: SearchPersonDto): Promise<Person[]> {
+		return await this.personCrud.find({
+			where: filters
+		});
 	}
-
 }

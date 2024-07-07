@@ -9,10 +9,10 @@ export class Person {
 	@Column({ name: 'name', length: 70, nullable: false })
 	name: string;
 
-	@Column({name: 'email'})
+	@Column({ name: 'email' })
 	email: string;
 
-	@Column({name: 'birth_date'})
+	@Column({ name: 'birth_date' })
 	birthDate: Date;
 
 }

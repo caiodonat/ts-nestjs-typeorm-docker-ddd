@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column } from "typeorm";
+import { IsEmail } from "class-validator";
 
 export class CreatePersonDto {
 
@@ -7,9 +7,12 @@ export class CreatePersonDto {
 		example: 'Caio Donat'
 	})
 	name: string;
-	
+
 	@ApiProperty({
-		example: 'cdonat@mail.io'
+		example: 'cdonat@mail.io',
+	})
+	@IsEmail({}, {
+		message: 'Email com formato invalido'
 	})
 	email: string;
 
